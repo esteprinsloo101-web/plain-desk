@@ -1,3 +1,5 @@
+**LIVE 2026-09-06:** https://esteprinsloo101-web.github.io/plain-desk/ · repo https://github.com/esteprinsloo101-web/plain-desk · `gh` auth OK as esteprinsloo101-web
+
 # Publish Plain Desk to GitHub Pages
 
 **Blocker on authoring box (2026-09-06):** `gh` is **not logged in** (`gh auth status` fails). No `GH_TOKEN` / `GITHUB_TOKEN` in the environment. Public API: `esteprinsloo101-web/judgment-os` exists (200); `esteprinsloo101-web/plain-desk` does **not** yet (404).
