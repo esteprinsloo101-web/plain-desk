@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://esteprinsloo101-web.github.io/plain-desk/sitemap.xml
