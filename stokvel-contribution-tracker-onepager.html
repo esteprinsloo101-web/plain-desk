@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free Stokvel Contribution Tracker (Jan–Dec) | Plain Desk</title>
+<meta name="description" content="Free printable SA stokvel contribution sheet: member name, Jan–Dec columns, running total, notes. Templates only — not a bank or advice. Upgrade path: Stokvel OS R199." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://esteprinsloo101-web.github.io/plain-desk/stokvel-contribution-tracker-onepager.html" />
+<meta property="og:title" content="Free Stokvel Contribution Tracker (Jan–Dec)" />
+<meta property="og:description" content="Printable SA stokvel contribution sheet — members, months, totals. Templates only. Bridge to Stokvel OS." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://esteprinsloo101-web.github.io/plain-desk/stokvel-contribution-tracker-onepager.html" />
+<meta name="theme-color" content="#1a5c4a" />
+<style>
+  :root {
+    --ink: #1a1f1c;
+    --muted: #5a655e;
+    --line: #c9c4ba;
+    --brand: #1a5c4a;
+    --paper: #fff;
+    --bg: #f7f5f0;
+    --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .sheet {
+    width: min(100% - 1.5rem, 1100px);
+    margin: 1rem auto 2rem;
+    background: var(--paper);
+    border: 1px solid #e2ddd3;
+    border-radius: 12px;
+    padding: 1.25rem 1.35rem 1.5rem;
+  }
+  .top {
+    display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem;
+    justify-content: space-between; align-items: flex-start;
+    margin-bottom: 0.85rem;
+  }
+  .brand {
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    font-size: 0.75rem; color: var(--brand); text-decoration: none;
+  }
+  h1 { font-size: 1.35rem; margin: 0.15rem 0 0.35rem; line-height: 1.25; }
+  .sub { color: var(--muted); margin: 0; font-size: 0.92rem; max-width: 40rem; }
+  .meta {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.5rem 0.75rem; margin: 0.85rem 0 1rem;
+  }
+  .meta label {
+    display: block; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.2rem;
+  }
+  .meta .field {
+    border: 1px solid var(--line); border-radius: 6px;
+    min-height: 1.85rem; padding: 0.35rem 0.5rem; background: #fafaf8;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1rem; }
+  .btn {
+    display: inline-block; background: var(--brand); color: #fff !important;
+    text-decoration: none; font-weight: 650; padding: 0.55rem 0.95rem;
+    border-radius: 8px; border: 0; cursor: pointer; font-size: 0.9rem;
+  }
+  .btn.ghost {
+    background: transparent; color: var(--ink) !important;
+    border: 1px solid var(--line);
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.78rem;
+    min-width: 920px;
+  }
+  th, td {
+    border: 1px solid var(--line); padding: 0.28rem 0.32rem;
+    text-align: center; vertical-align: middle;
+  }
+  th { background: #eef3f0; font-weight: 650; }
+  td.name, th.name { text-align: left; min-width: 7.5rem; }
+  td.notes, th.notes { text-align: left; min-width: 5.5rem; }
+  td.total, th.total { font-weight: 650; background: #f5f8f6; min-width: 3.4rem; }
+  td.month { min-width: 2.4rem; height: 1.7rem; }
+  .howto {
+    margin: 1rem 0 0; color: var(--muted); font-size: 0.88rem;
+  }
+  .howto ol { margin: 0.35rem 0 0; padding-left: 1.2rem; }
+  .disclaimer {
+    margin-top: 1rem; padding: 0.75rem 0.85rem;
+    background: #f3f1eb; border: 1px solid #e2ddd3; border-radius: 8px;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .cta-strip {
+    margin-top: 1rem; padding: 0.9rem 1rem;
+    background: #eef6f2; border: 1px solid #c5ddd2; border-radius: 10px;
+  }
+  .cta-strip h2 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+  .cta-strip p { margin: 0 0 0.65rem; color: var(--muted); font-size: 0.9rem; }
+  .fine { font-size: 0.8rem; color: var(--muted); }
+  .screen-nav { margin-bottom: 0.5rem; font-size: 0.85rem; }
+  .screen-nav a { color: var(--brand); }
+  @media print {
+    body { background: #fff; font-size: 11px; }
+    .sheet {
+      width: 100%; margin: 0; border: 0; border-radius: 0; padding: 0;
+      box-shadow: none;
+    }
+    .no-print { display: none !important; }
+    .actions { display: none !important; }
+    table { min-width: 0; font-size: 9.5px; }
+    th, td { padding: 0.18rem 0.2rem; }
+    .cta-strip { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+  @page { size: A4 landscape; margin: 10mm; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <p class="screen-nav no-print">
+    <a href="index.html">Plain Desk</a> ·
+    <a href="blog/free-stokvel-contribution-sheet-sa.html">Freebie landing</a> ·
+    <a href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Stokvel OS</a>
+  </p>
+
+  <div class="top">
+    <div>
+      <a class="brand" href="index.html">Plain Desk</a>
+      <h1>Stokvel Contribution Tracker — Jan–Dec</h1>
+      <p class="sub">Simple year grid for SA savings clubs, grocery stokvels, and burial society <strong>bookkeeping</strong>. Fill ZAR amounts (or ✓) each month. Print or save as PDF.</p>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div>
+      <label>Club / stokvel name</label>
+      <div class="field" contenteditable="true" aria-label="Club name"></div>
+    </div>
+    <div>
+      <label>Year</label>
+      <div class="field" contenteditable="true" aria-label="Year">2026</div>
+    </div>
+    <div>
+      <label>Monthly contribution (ZAR)</label>
+      <div class="field" contenteditable="true" aria-label="Monthly contribution"></div>
+    </div>
+    <div>
+      <label>Treasurer</label>
+      <div class="field" contenteditable="true" aria-label="Treasurer"></div>
+    </div>
+  </div>
+
+  <div class="actions no-print">
+    <button type="button" class="btn" onclick="window.print()">Print / Save PDF</button>
+    <a class="btn ghost" href="blog/free-stokvel-contribution-sheet-sa.html">How to use</a>
+    <a class="btn" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Need full pack? Stokvel OS — R199</a>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Member name</th>
+          <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
+          <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
+          <th class="total">YTD total</th>
+          <th class="notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 12 blank member rows -->
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr><td class="name" contenteditable="true">&nbsp;</td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="total" contenteditable="true"></td><td class="notes" contenteditable="true"></td></tr>
+        <tr>
+          <th class="name">Month / club totals</th>
+          <td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td><td class="month" contenteditable="true"></td>
+          <td class="total" contenteditable="true"></td>
+          <td class="notes" contenteditable="true"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="howto">
+    <strong>How to use (5 minutes)</strong>
+    <ol>
+      <li>Write club name, year, and monthly contribution (ZAR).</li>
+      <li>List members. Each month mark paid amount or ✓. Put arrears in Notes.</li>
+      <li>Update YTD total = sum of months paid (or count of ✓ × contribution).</li>
+      <li>Print landscape A4 or “Save as PDF” before meetings. One editor owns the master.</li>
+    </ol>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> Free template only. Plain Desk is <strong>not</strong> a bank, not insurance, not a NASASA filing service, and not legal, tax, or financial advice. You keep the money and the member data (POPIA common sense). This sheet does not move funds or replace your constitution / bank mandate.
+  </div>
+
+  <div class="cta-strip">
+    <h2>Outgrew the one-pager?</h2>
+    <p><strong>Plain Desk Stokvel OS</strong> adds constitution wording, member register, fine/loan log, and year-end payout sheets — one download for SA treasurers. R199 · instant · faceless brand.</p>
+    <p><a class="btn" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Get Stokvel OS — R199</a></p>
+    <p class="fine">https://stofficial.gumroad.com/l/ydbgne</p>
+  </div>
+</div>
+</body>
+</html>
