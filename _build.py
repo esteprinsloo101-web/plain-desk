@@ -228,7 +228,7 @@ def md_to_html(body: str) -> str:
             url = line.strip().lstrip("→").strip()
             out.append(
                 f'<p class="cta-link"><a class="btn" href="{html.escape(url)}" rel="noopener">'
-                f"Get Stokvel OS — R199</a></p>"
+                f"Get Stokvel OS — R99</a></p>"
             )
             i += 1
             continue
@@ -339,7 +339,7 @@ def article_page(meta: dict, body_html: str, slug: str) -> str:
   <aside class="cta-card">
     <h2>Plain Desk Stokvel OS</h2>
     <p>Constitution template + member register + contribution tracker + fine/loan log + year-end payout. One-time download for SA stokvels, savings clubs, and burial society bookkeeping.</p>
-    <p><a class="btn" href="{CTA}" rel="noopener">Get Stokvel OS — R199</a></p>
+    <p><a class="btn" href="{CTA}" rel="noopener">Get Stokvel OS — R99</a></p>
     <p class="fine">Not a bank · Not insurance · Not financial advice</p>
   </aside>
 </main>
@@ -351,7 +351,7 @@ def article_page(meta: dict, body_html: str, slug: str) -> str:
 def index_page(cards: list[dict]) -> str:
     title = "Plain Desk — Stokvel OS & SA treasurer templates"
     desc = html.escape(
-        "Faceless SA admin templates. Stokvel OS: constitution + contribution tracker for savings clubs and burial societies. R199 on Gumroad."
+        "Faceless SA admin templates. Stokvel OS: constitution + contribution tracker for savings clubs and burial societies. R99 intro on Gumroad."
     )
     canonical = f"{BASE}/"
     head = SHELL_HEAD.format(
@@ -379,7 +379,7 @@ def index_page(cards: list[dict]) -> str:
     <h1>Stop running the stokvel from WhatsApp chaos.</h1>
     <p class="lead">Plain Desk builds calm, practical templates for treasurers — constitution wording plus the spreadsheets that keep contributions, members, and year-end payouts visible.</p>
     <p class="hero-actions">
-      <a class="btn" href="{CTA}" rel="noopener">Get Stokvel OS — R199</a>
+      <a class="btn" href="{CTA}" rel="noopener">Get Stokvel OS — R99</a>
       <a class="btn ghost" href="#articles">Read the guides</a>
     </p>
     <ul class="hero-bullets">
@@ -394,7 +394,7 @@ def index_page(cards: list[dict]) -> str:
   <section class="wrap product" id="stokvel-os">
     <h2>Stokvel OS</h2>
     <p>One treasurer pack for SA savings clubs, grocery stokvels, and burial society <strong>bookkeeping</strong>. Rules on paper; money movements in a ledger you own.</p>
-    <p><a class="btn" href="{CTA}" rel="noopener">Buy on Gumroad — R199</a></p>
+    <p><a class="btn" href="{CTA}" rel="noopener">Buy on Gumroad — R99</a></p>
   </section>
 
   <section class="wrap articles" id="articles">
