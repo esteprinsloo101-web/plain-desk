@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stokvel Rotation Schedule Generator — Who Gets Paid Which Month | Plain Desk</title>
+<meta name="description" content="Free rotating stokvel (umgalelo) schedule generator. Paste member names, pick a start month and contribution, and get a printable month-by-month payout order with pot size. Download as CSV." />
+<meta name="keywords" content="rotating stokvel schedule, stokvel rotation order, umgalelo payout schedule" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-rotation-schedule-generator.html" />
+<meta property="og:title" content="Stokvel rotation schedule generator (free)" />
+<meta property="og:description" content="Free rotating stokvel (umgalelo) schedule generator. Paste member names, pick a start month and contribution, and get a printable month-by-month payout order with pot size. Download as CSV." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-rotation-schedule-generator.html" />
+<meta property="og:image" content="https://esteprinsloo101-web.github.io/plain-desk/brand/og.png" />
+<meta name="theme-color" content="#1a5c4a" />
+<link rel="stylesheet" href="../styles.css" />
+
+<style>
+.tool{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;margin:1.25rem 0}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.85rem}
+.tool-grid label{display:flex;flex-direction:column;font-size:.92rem;color:var(--muted);gap:.3rem}
+.tool-grid .span2{grid-column:1/-1}
+.tool input,.tool select,.tool textarea{font:inherit;padding:.55rem .65rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.tool-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.res{width:100%;border-collapse:collapse;margin-top:1rem}.res td,.res th{border-bottom:1px solid var(--line);padding:.45rem .3rem;text-align:left}
+.res tr:last-child td{font-weight:700}
+#sum{background:#f1f6f3;border-left:4px solid var(--brand);padding:.75rem;margin-top:1rem;white-space:pre-wrap}
+.fine{font-size:.85rem;color:var(--muted)}
+@media print{.site-header,.cta-card,.tool-actions,footer{display:none}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stokvel rotation schedule generator", "url": "https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-rotation-schedule-generator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "ZAR"}, "publisher": {"@type": "Organization", "name": "Plain Desk"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a rotating stokvel?", "acceptedAnswer": {"@type": "Answer", "text": "Each month every member contributes the same amount and one member receives the whole pot. The cycle ends when everyone has received once."}}, {"@type": "Question", "name": "How big is each pot?", "acceptedAnswer": {"@type": "Answer", "text": "Monthly contribution \u00d7 number of members. With 10 members at R1,000 the pot is R10,000 every month."}}, {"@type": "Question", "name": "Is the random draw fair?", "acceptedAnswer": {"@type": "Answer", "text": "It uses a standard shuffle in your browser. Do it together on one screen and minute the order so nobody can dispute it later."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner"><a class="logo" href="../index.html">Plain Desk</a>
+<nav aria-label="Primary"><a href="index.html">Free tools</a><a href="../index.html#articles">Guides</a><a class="nav-cta" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Stokvel OS</a></nav></div></header>
+<main id="main" class="wrap article">
+<p class="eyebrow"><a href="../index.html">Plain Desk</a> · <a href="index.html">Free tools</a></p>
+<h1>Stokvel rotation schedule generator</h1>
+<p>In a rotating stokvel every member gets the full pot once. Paste your members (one per line), choose the start month and contribution, and you get a <strong>printable rotation table</strong> you can share in the group and download as CSV.</p>
+<section class="tool" aria-label="Calculator">
+<form onsubmit="event.preventDefault();run();">
+
+<div class="tool-grid">
+<label class="span2">Member names (one per line, in agreed order)<textarea id="names" rows="7">Member A
+Member B
+Member C
+Member D
+Member E
+Member F</textarea></label>
+<label>Monthly contribution per member (R)<input id="c" type="number" min="0" step="10" value="1000"></label>
+<label>First payout month<input id="start" type="month" value="2026-11"></label>
+<label>Order<select id="ord"><option value="as">As typed</option><option value="rand">Random draw (fair shuffle)</option></select></label>
+</div>
+<div class="tool-actions"><button class="btn" type="submit">Calculate</button><button type="button" class="btn ghost" onclick="csv()">Download CSV</button><button type="button" class="btn ghost" onclick="window.print()">Print</button></div>
+</form>
+<div id="res" aria-live="polite"></div>
+<div id="sum" hidden></div>
+<p><button id="copy" type="button" class="btn ghost" hidden onclick="copySum()">Copy minutes line</button></p>
+<p class="fine">Runs in your browser. Nothing is sent or stored.</p>
+</section>
+
+<h2>Fair ways to set the order</h2>
+<ul><li><strong>Draw at the first meeting.</strong> Use the random option on a shared screen, then minute the result.</li><li><strong>Need-based.</strong> Members with school fees in January take January. Agree it openly.</li><li><strong>Joining order.</strong> Simple, but new members wait longest.</li></ul>
+<h2>Protect the last member</h2>
+<p>The member paid last carries the most risk: everyone else has already been paid. Many clubs ask early receivers to sign an acknowledgement, keep a small reserve, or set a clear rule for members who stop paying after their turn.</p>
+
+<aside class="cta-card">
+<h2>Want the whole year sorted, not just one sum?</h2>
+<p><strong>Stokvel OS (R99)</strong> is a ready meeting pack: constitution, member register, contribution and payout calendar, fine and loan log, and a year-end payout sheet. One download, no app, no subscription.</p>
+<p><a class="btn" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Get Stokvel OS — R99</a> <a class="btn ghost" href="https://stofficial.gumroad.com/l/jidbaq" rel="noopener">Treasurer Bundle — R297</a></p>
+<p class="fine">Templates and checklists only. Your club decides its own rules.</p>
+</aside>
+<h2>Questions</h2>
+<h3>What is a rotating stokvel?</h3><p>Each month every member contributes the same amount and one member receives the whole pot. The cycle ends when everyone has received once.</p><h3>How big is each pot?</h3><p>Monthly contribution × number of members. With 10 members at R1,000 the pot is R10,000 every month.</p><h3>Is the random draw fair?</h3><p>It uses a standard shuffle in your browser. Do it together on one screen and minute the order so nobody can dispute it later.</p>
+<h2>More free tools</h2><ul><li><a href="stokvel-payout-calculator.html">Stokvel payout calculator</a></li><li><a href="stokvel-late-payment-fine-calculator.html">Stokvel late payment and fine calculator</a></li><li><a href="burial-society-contribution-calculator.html">Burial society contribution calculator</a></li></ul>
+<p class="fine">Arithmetic helper only. Your club's constitution and members decide the rules. Plain Desk is not a bank, insurer or financial adviser, and this page gives no financial, tax or legal advice.</p>
+</main>
+<footer class="wrap"><p class="fine">Plain Desk · faceless SA admin templates · <a href="../index.html">Home</a></p></footer>
+
+<script>
+const v=id=>document.getElementById(id).value;
+const R=x=>'R'+(Math.round(x*100)/100).toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+function out(pairs,s){document.getElementById('res').innerHTML='<table class="res">'+pairs.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td></tr>`).join('')+'</table>';summary(s);}
+function tableOut(h,rows){document.getElementById('res').innerHTML='<table class="res"><tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(x=>`<td>${String(x).replace(/</g,'&lt;')}</td>`).join('')+'</tr>').join('')+'</table>';}
+function summary(s){const el=document.getElementById('sum');el.textContent=s;el.hidden=false;document.getElementById('copy').hidden=false;}
+function copySum(){navigator.clipboard.writeText(document.getElementById('sum').textContent).then(()=>{const b=document.getElementById('copy');b.textContent='Copied';setTimeout(()=>b.textContent='Copy minutes line',1500)});}
+</script>
+<script>
+let rows=[];
+function run(){let names=v('names').split(/\n/).map(s=>s.trim()).filter(Boolean);const c=+v('c');
+if(v('ord')==='rand'){for(let k=names.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[names[k],names[j]]=[names[j],names[k]];}}
+const pot=c*names.length;let [y,mo]=v('start').split('-').map(Number);rows=[];
+names.forEach((nm,idx)=>{const d=new Date(y,mo-1+idx,1);rows.push([d.toLocaleString('en-ZA',{month:'long',year:'numeric'}),nm,R(pot)]);});
+tableOut(['Month','Receives the pot','Pot size'],rows);
+summary(`Rotation: ${names.length} members × ${R(c)} = pot of ${R(pot)} each month, starting ${rows[0]?rows[0][0]:''} and ending ${rows.length?rows[rows.length-1][0]:''}.`);}
+function csv(){const t=[['Month','Receives the pot','Pot size'],...rows].map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n');
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'}));a.download='stokvel-rotation.csv';a.click();}
+</script>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stokvel Payout Calculator (South Africa) — Free, No Signup | Plain Desk</title>
+<meta name="description" content="Free stokvel payout calculator for South African savings clubs. Enter members, monthly contribution, months, interest, fines and bank fees to see the total pool and each member&#x27;s year-end payout." />
+<meta name="keywords" content="stokvel payout calculator, year-end stokvel payout, savings club payout South Africa" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-payout-calculator.html" />
+<meta property="og:title" content="Stokvel payout calculator (free)" />
+<meta property="og:description" content="Free stokvel payout calculator for South African savings clubs. Enter members, monthly contribution, months, interest, fines and bank fees to see the total pool and each member&#x27;s year-end payout." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-payout-calculator.html" />
+<meta property="og:image" content="https://esteprinsloo101-web.github.io/plain-desk/brand/og.png" />
+<meta name="theme-color" content="#1a5c4a" />
+<link rel="stylesheet" href="../styles.css" />
+
+<style>
+.tool{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;margin:1.25rem 0}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.85rem}
+.tool-grid label{display:flex;flex-direction:column;font-size:.92rem;color:var(--muted);gap:.3rem}
+.tool-grid .span2{grid-column:1/-1}
+.tool input,.tool select,.tool textarea{font:inherit;padding:.55rem .65rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.tool-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.res{width:100%;border-collapse:collapse;margin-top:1rem}.res td,.res th{border-bottom:1px solid var(--line);padding:.45rem .3rem;text-align:left}
+.res tr:last-child td{font-weight:700}
+#sum{background:#f1f6f3;border-left:4px solid var(--brand);padding:.75rem;margin-top:1rem;white-space:pre-wrap}
+.fine{font-size:.85rem;color:var(--muted)}
+@media print{.site-header,.cta-card,.tool-actions,footer{display:none}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stokvel payout calculator", "url": "https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-payout-calculator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "ZAR"}, "publisher": {"@type": "Organization", "name": "Plain Desk"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is a stokvel payout calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Add all contributions actually received, plus interest and fines, minus bank and admin fees. Divide by the number of members for an equal share, unless your constitution sets a different rule for members in arrears."}}, {"@type": "Question", "name": "Should interest be shared equally?", "acceptedAnswer": {"@type": "Answer", "text": "That is your club's decision. Many clubs split interest equally; others split it by how much each member contributed. Minute whichever rule you choose."}}, {"@type": "Question", "name": "Does this store my numbers?", "acceptedAnswer": {"@type": "Answer", "text": "No. The calculator runs in your browser. Nothing is sent or saved."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner"><a class="logo" href="../index.html">Plain Desk</a>
+<nav aria-label="Primary"><a href="index.html">Free tools</a><a href="../index.html#articles">Guides</a><a class="nav-cta" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Stokvel OS</a></nav></div></header>
+<main id="main" class="wrap article">
+<p class="eyebrow"><a href="../index.html">Plain Desk</a> · <a href="index.html">Free tools</a></p>
+<h1>Stokvel payout calculator</h1>
+<p>December payout day goes badly when nobody can show the sum. Enter your club's numbers below and you get the <strong>total pool</strong>, the <strong>net amount after fees</strong> and the <strong>equal share per member</strong>, plus a one-line summary you can paste into your meeting minutes.</p>
+<section class="tool" aria-label="Calculator">
+<form onsubmit="event.preventDefault();run();">
+
+<div class="tool-grid">
+<label>Number of members<input id="m" type="number" min="1" value="12"></label>
+<label>Monthly contribution per member (R)<input id="c" type="number" min="0" step="10" value="500"></label>
+<label>Months contributed<input id="n" type="number" min="1" max="36" value="12"></label>
+<label>Bank interest earned (R, optional)<input id="i" type="number" min="0" step="1" value="0"></label>
+<label>Fines collected (R, optional)<input id="f" type="number" min="0" step="1" value="0"></label>
+<label>Bank / admin fees paid (R, optional)<input id="b" type="number" min="0" step="1" value="0"></label>
+<label>Members short on contributions (R total still owed)<input id="o" type="number" min="0" step="1" value="0"></label>
+</div>
+<div class="tool-actions"><button class="btn" type="submit">Calculate</button><button type="button" class="btn ghost" onclick="window.print()">Print</button></div>
+</form>
+<div id="res" aria-live="polite"></div>
+<div id="sum" hidden></div>
+<p><button id="copy" type="button" class="btn ghost" hidden onclick="copySum()">Copy minutes line</button></p>
+<p class="fine">Runs in your browser. Nothing is sent or stored.</p>
+</section>
+
+<h2>How the calculation works</h2>
+<p>Expected contributions are members × monthly amount × months. We subtract what is still owed, add bank interest and fines, and take off bank or admin fees. The net pool divided by members is the equal share.</p>
+<p>Many clubs <strong>do not</strong> pay an equal share to a member who is behind. If that is your rule, pay that member their own contributions minus arrears and fines, and split the rest among members who are up to date. Write the rule down <em>before</em> November so payout day is not a debate.</p>
+<h2>Before payout day checklist</h2>
+<ul><li>Match the bank statement to your contribution sheet, month by month.</li><li>List every member with arrears and the amount owed.</li><li>Agree how fines and interest are split, and minute it.</li><li>Two signatories check the final payout list.</li></ul>
+
+<aside class="cta-card">
+<h2>Want the whole year sorted, not just one sum?</h2>
+<p><strong>Stokvel OS (R99)</strong> is a ready meeting pack: constitution, member register, contribution and payout calendar, fine and loan log, and a year-end payout sheet. One download, no app, no subscription.</p>
+<p><a class="btn" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Get Stokvel OS — R99</a> <a class="btn ghost" href="https://stofficial.gumroad.com/l/jidbaq" rel="noopener">Treasurer Bundle — R297</a></p>
+<p class="fine">Templates and checklists only. Your club decides its own rules.</p>
+</aside>
+<h2>Questions</h2>
+<h3>How is a stokvel payout calculated?</h3><p>Add all contributions actually received, plus interest and fines, minus bank and admin fees. Divide by the number of members for an equal share, unless your constitution sets a different rule for members in arrears.</p><h3>Should interest be shared equally?</h3><p>That is your club&#x27;s decision. Many clubs split interest equally; others split it by how much each member contributed. Minute whichever rule you choose.</p><h3>Does this store my numbers?</h3><p>No. The calculator runs in your browser. Nothing is sent or saved.</p>
+<h2>More free tools</h2><ul><li><a href="stokvel-rotation-schedule-generator.html">Stokvel rotation schedule generator</a></li><li><a href="stokvel-late-payment-fine-calculator.html">Stokvel late payment and fine calculator</a></li><li><a href="burial-society-contribution-calculator.html">Burial society contribution calculator</a></li></ul>
+<p class="fine">Arithmetic helper only. Your club's constitution and members decide the rules. Plain Desk is not a bank, insurer or financial adviser, and this page gives no financial, tax or legal advice.</p>
+</main>
+<footer class="wrap"><p class="fine">Plain Desk · faceless SA admin templates · <a href="../index.html">Home</a></p></footer>
+
+<script>
+const v=id=>document.getElementById(id).value;
+const R=x=>'R'+(Math.round(x*100)/100).toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+function out(pairs,s){document.getElementById('res').innerHTML='<table class="res">'+pairs.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td></tr>`).join('')+'</table>';summary(s);}
+function tableOut(h,rows){document.getElementById('res').innerHTML='<table class="res"><tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(x=>`<td>${String(x).replace(/</g,'&lt;')}</td>`).join('')+'</tr>').join('')+'</table>';}
+function summary(s){const el=document.getElementById('sum');el.textContent=s;el.hidden=false;document.getElementById('copy').hidden=false;}
+function copySum(){navigator.clipboard.writeText(document.getElementById('sum').textContent).then(()=>{const b=document.getElementById('copy');b.textContent='Copied';setTimeout(()=>b.textContent='Copy minutes line',1500)});}
+</script>
+<script>
+function run(){const m=+v('m'),c=+v('c'),n=+v('n'),i=+v('i'),f=+v('f'),b=+v('b'),o=+v('o');
+const expected=m*c*n, received=expected-o, net=received+i+f-b, share=m?net/m:0;
+out([['Expected contributions',R(expected)],['Actually received',R(received)],['+ Interest',R(i)],['+ Fines',R(f)],['− Fees',R(b)],['Net pool to pay out',R(net)],['Equal share per member',R(share)]],
+`Year-end payout: ${m} members × ${R(c)} × ${n} months = ${R(expected)} expected; ${R(received)} received; net pool after interest ${R(i)}, fines ${R(f)} and fees ${R(b)} = ${R(net)}; equal share ${R(share)} per member (subject to arrears rules in our constitution).`);}
+</script>
+</body></html>

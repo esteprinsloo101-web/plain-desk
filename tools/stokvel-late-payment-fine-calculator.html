@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stokvel Late Payment &amp; Fine Calculator — Arrears Owed (SA) | Plain Desk</title>
+<meta name="description" content="Work out what a stokvel member owes after missed contributions: arrears plus flat or percentage fines, with an optional cap. Free, no signup, meeting-ready summary line." />
+<meta name="keywords" content="stokvel fine calculator, stokvel late payment penalty, stokvel arrears" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-late-payment-fine-calculator.html" />
+<meta property="og:title" content="Stokvel late payment and fine calculator (free)" />
+<meta property="og:description" content="Work out what a stokvel member owes after missed contributions: arrears plus flat or percentage fines, with an optional cap. Free, no signup, meeting-ready summary line." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-late-payment-fine-calculator.html" />
+<meta property="og:image" content="https://esteprinsloo101-web.github.io/plain-desk/brand/og.png" />
+<meta name="theme-color" content="#1a5c4a" />
+<link rel="stylesheet" href="../styles.css" />
+
+<style>
+.tool{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;margin:1.25rem 0}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.85rem}
+.tool-grid label{display:flex;flex-direction:column;font-size:.92rem;color:var(--muted);gap:.3rem}
+.tool-grid .span2{grid-column:1/-1}
+.tool input,.tool select,.tool textarea{font:inherit;padding:.55rem .65rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.tool-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.res{width:100%;border-collapse:collapse;margin-top:1rem}.res td,.res th{border-bottom:1px solid var(--line);padding:.45rem .3rem;text-align:left}
+.res tr:last-child td{font-weight:700}
+#sum{background:#f1f6f3;border-left:4px solid var(--brand);padding:.75rem;margin-top:1rem;white-space:pre-wrap}
+.fine{font-size:.85rem;color:var(--muted)}
+@media print{.site-header,.cta-card,.tool-actions,footer{display:none}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stokvel late payment and fine calculator", "url": "https://esteprinsloo101-web.github.io/plain-desk/tools/stokvel-late-payment-fine-calculator.html", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "ZAR"}, "publisher": {"@type": "Organization", "name": "Plain Desk"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can a stokvel charge fines?", "acceptedAnswer": {"@type": "Answer", "text": "Clubs commonly agree fines in their constitution. Only apply rules members agreed to in writing."}}, {"@type": "Question", "name": "Should fines be capped?", "acceptedAnswer": {"@type": "Answer", "text": "A cap stops a member's debt growing past what they can realistically repay, which keeps them in the club. It's your club's choice."}}, {"@type": "Question", "name": "What happens to fines at year end?", "acceptedAnswer": {"@type": "Answer", "text": "Most clubs add fines to the pool and share them, or use them for the year-end function. Minute the rule."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner"><a class="logo" href="../index.html">Plain Desk</a>
+<nav aria-label="Primary"><a href="index.html">Free tools</a><a href="../index.html#articles">Guides</a><a class="nav-cta" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Stokvel OS</a></nav></div></header>
+<main id="main" class="wrap article">
+<p class="eyebrow"><a href="../index.html">Plain Desk</a> · <a href="index.html">Free tools</a></p>
+<h1>Stokvel late payment and fine calculator</h1>
+<p>Late payments are where stokvels fall apart. Use the rule your club already agreed, enter the numbers, and get a <strong>clear amount owed</strong> with a neutral line for the minutes. No names are stored.</p>
+<section class="tool" aria-label="Calculator">
+<form onsubmit="event.preventDefault();run();">
+
+<div class="tool-grid">
+<label>Monthly contribution (R)<input id="c" type="number" min="0" step="10" value="500"></label>
+<label>Months missed / late<input id="n" type="number" min="0" max="36" value="2"></label>
+<label>Fine type<select id="t"><option value="flat">Flat amount per late month</option><option value="pct">% of contribution per late month</option><option value="once">Once-off flat fine</option></select></label>
+<label>Fine value (R or %)<input id="fv" type="number" min="0" step="1" value="50"></label>
+<label>Fine cap (R, 0 = no cap)<input id="cap" type="number" min="0" step="1" value="0"></label>
+<label>Already paid towards arrears (R)<input id="p" type="number" min="0" step="1" value="0"></label>
+</div>
+<div class="tool-actions"><button class="btn" type="submit">Calculate</button><button type="button" class="btn ghost" onclick="window.print()">Print</button></div>
+</form>
+<div id="res" aria-live="polite"></div>
+<div id="sum" hidden></div>
+<p><button id="copy" type="button" class="btn ghost" hidden onclick="copySum()">Copy minutes line</button></p>
+<p class="fine">Runs in your browser. Nothing is sent or stored.</p>
+</section>
+
+<h2>Keep it about the rule, not the person</h2>
+<p>Fines work when they are written down before anyone is late. Read the rule from the constitution, calculate, and minute the amount. Avoid discussing reasons in the group chat. Handle hardship requests privately with the committee.</p>
+<h2>Common fine rules in SA clubs</h2>
+<ul><li>A flat amount per late month (for example R50).</li><li>A percentage of the contribution per late month (for example 10%).</li><li>A once-off fine plus the arrears, with a cap so debts do not spiral.</li></ul>
+
+<aside class="cta-card">
+<h2>Want the whole year sorted, not just one sum?</h2>
+<p><strong>Stokvel OS (R99)</strong> is a ready meeting pack: constitution, member register, contribution and payout calendar, fine and loan log, and a year-end payout sheet. One download, no app, no subscription.</p>
+<p><a class="btn" href="https://stofficial.gumroad.com/l/ydbgne" rel="noopener">Get Stokvel OS — R99</a> <a class="btn ghost" href="https://stofficial.gumroad.com/l/jidbaq" rel="noopener">Treasurer Bundle — R297</a></p>
+<p class="fine">Templates and checklists only. Your club decides its own rules.</p>
+</aside>
+<h2>Questions</h2>
+<h3>Can a stokvel charge fines?</h3><p>Clubs commonly agree fines in their constitution. Only apply rules members agreed to in writing.</p><h3>Should fines be capped?</h3><p>A cap stops a member&#x27;s debt growing past what they can realistically repay, which keeps them in the club. It&#x27;s your club&#x27;s choice.</p><h3>What happens to fines at year end?</h3><p>Most clubs add fines to the pool and share them, or use them for the year-end function. Minute the rule.</p>
+<h2>More free tools</h2><ul><li><a href="stokvel-payout-calculator.html">Stokvel payout calculator</a></li><li><a href="stokvel-rotation-schedule-generator.html">Stokvel rotation schedule generator</a></li><li><a href="burial-society-contribution-calculator.html">Burial society contribution calculator</a></li></ul>
+<p class="fine">Arithmetic helper only. Your club's constitution and members decide the rules. Plain Desk is not a bank, insurer or financial adviser, and this page gives no financial, tax or legal advice.</p>
+</main>
+<footer class="wrap"><p class="fine">Plain Desk · faceless SA admin templates · <a href="../index.html">Home</a></p></footer>
+
+<script>
+const v=id=>document.getElementById(id).value;
+const R=x=>'R'+(Math.round(x*100)/100).toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+function out(pairs,s){document.getElementById('res').innerHTML='<table class="res">'+pairs.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td></tr>`).join('')+'</table>';summary(s);}
+function tableOut(h,rows){document.getElementById('res').innerHTML='<table class="res"><tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(x=>`<td>${String(x).replace(/</g,'&lt;')}</td>`).join('')+'</tr>').join('')+'</table>';}
+function summary(s){const el=document.getElementById('sum');el.textContent=s;el.hidden=false;document.getElementById('copy').hidden=false;}
+function copySum(){navigator.clipboard.writeText(document.getElementById('sum').textContent).then(()=>{const b=document.getElementById('copy');b.textContent='Copied';setTimeout(()=>b.textContent='Copy minutes line',1500)});}
+</script>
+<script>
+function run(){const c=+v('c'),n=+v('n'),t=v('t'),fv=+v('fv'),cap=+v('cap'),p=+v('p');
+let fine=t==='flat'?fv*n:t==='pct'?c*fv/100*n:(n>0?fv:0); if(cap>0) fine=Math.min(fine,cap);
+const arrears=c*n, total=Math.max(0,arrears+fine-p);
+out([['Contribution arrears',R(arrears)],['Fines (per club rule)',R(fine)],['Less paid so far',R(p)],['Total still owed',R(total)]],
+`Arrears: ${n} month(s) × ${R(c)} = ${R(arrears)}; fine per constitution ${R(fine)}; paid ${R(p)}; balance owed ${R(total)}. Member to settle by the date agreed at this meeting.`);}
+</script>
+</body></html>
